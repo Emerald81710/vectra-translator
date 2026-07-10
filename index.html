@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directional Language Translator</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --text: #f8fafc;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            color: var(--accent);
+            margin-top: 0;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #475569;
+            background-color: #0f172a;
+            color: var(--text);
+            font-size: 16px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .arrow {
+            text-align: center;
+            font-size: 24px;
+            margin: 10px 0;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Directional Translator</h1>
+    
+    <label for="englishInput">English Text:</label>
+    <textarea id="englishInput" placeholder="Type English here..."></textarea>
+    
+    <div class="arrow">↕</div>
+    
+    <label for="customInput">Directional Language:</label>
+    <textarea id="customInput" placeholder="Symbol translation will appear here..."></textarea>
+</div>
+
+<script>
+    // Your exact custom alphabet mapping
+    const translationMap = {
+        'A': '^',  'B': '»',  'C': '⟪',  'D': '⟫',  'E': '¦',  'F': '⌈',  'G': '↺',  'H': 'µ',
+        'I': 'v',  'J': '⌉',  'K': '⤶',  'L': '⌊',  'M': '⊓',  'N': '⊔',  'O': '↻',  'P': '⌌',
+        'Q': '⌍',  'R': '⇄',  'S': '∼',  'T': '┬',  'U': '⋏',  'V': '⋎',  'W': '⌗',  'X': '',
+        'Y': '⟰',  'Z': '↱',  ' ': '·',
+        '1': '⊢',  '2': '⊣',  '3': '⊤',  '4': '⊥',  '5': '⊹',  '6': '⊦',  '7': '⊧',  '8': '⫝',
+        '9': '⫝̸',  '0': '⊙'
+    };
+
+    // Create a reverse map for translating back to English
+    const reverseMap = {};
+    for (let key in translationMap) {
+        reverseMap[translationMap[key]] = key;
+    }
+
+    const englishInput = document.getElementById('englishInput');
+    const customInput = document.getElementById('customInput');
+
+    // Translate English to Custom Language
+    englishInput.addEventListener('input', () => {
+        const text = englishInput.value.toUpperCase();
+        let result = '';
+        for (let char of text) {
+            result += translationMap[char] !== undefined ? translationMap[char] : char;
+        }
+        customInput.value = result;
+    });
+
+    // Translate Custom Language back to English
+    customInput.addEventListener('input', () => {
+        const text = customInput.value;
+        let result = '';
+        // Group by characters to match multi-length symbols properly
+        for (let char of text) {
+            result += reverseMap[char] !== undefined ? reverseMap[char] : char;
+        }
+        englishInput.value = result.toLowerCase();
+    });
+</script>
+
+</body>
+</html>
