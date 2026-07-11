@@ -6,118 +6,243 @@
     <title>VECTRA Language Translator</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #38bdf8;
-            --text: #f8fafc;
+            --bg-color: #060a12;
+            --card-bg: #090f1a;
+            --accent: #10b981; /* Precise image green glow */
+            --accent-dim: rgba(16, 185, 129, 0.2);
+            --text: #94a3b8;
+            --text-light: #e2e8f0;
+            --border: #1e293b;
         }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             background-color: var(--bg-color);
-            color: var(--text);
+            /* Subtle CRT terminal background effect */
+            background-image: linear-gradient(rgba(18, 24, 38, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 4px, 6px 100%;
+            color: var(--text-light);
             margin: 0;
-            padding: 20px;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
+
         .container {
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
             background: var(--card-bg);
-            padding: 30px;
+            padding: 35px;
             border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            border: 1px solid #1e293b;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(16, 185, 129, 0.03);
+            position: relative;
         }
+
         h1 {
             text-align: center;
             color: var(--accent);
             margin-top: 0;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--accent-dim);
+            animation: textGlow 4s infinite alternate;
         }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 8px rgba(16, 185, 129, 0.3); }
+            100% { text-shadow: 0 0 18px rgba(16, 185, 129, 0.6); }
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
         label {
             display: block;
-            margin: 15px 0 5px;
+            margin: 0 0 8px 4px;
             font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #64748b;
         }
+
         textarea {
             width: 100%;
-            height: 100px;
-            padding: 10px;
+            height: 130px;
+            padding: 15px;
             border-radius: 6px;
-            border: 1px solid #475569;
-            background-color: #0f172a;
-            color: var(--text);
+            border: 1px solid #131e31;
+            background-color: #04070d;
+            color: var(--text-light);
             font-size: 16px;
             box-sizing: border-box;
             resize: vertical;
+            font-family: inherit;
+            transition: all 0.25s ease;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
         }
+
         textarea:focus {
             outline: none;
-            border-color: var(--accent);
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.15), inset 0 2px 8px rgba(0,0,0,0.8);
+            color: #fff;
         }
-        .arrow {
-            text-align: center;
-            font-size: 24px;
-            margin: 10px 0;
+
+        textarea::placeholder {
+            color: #334155;
+        }
+
+        .action-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            padding: 12px 20px;
+            background: #04070d;
+            border: 1px solid #131e31;
+            border-radius: 6px;
+        }
+
+        .status-node {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            letter-spacing: 1px;
             color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 11px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent);
+            color: #04070d;
+            box-shadow: 0 0 10px var(--accent-dim);
+        }
+
+        .legend {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed #1e293b;
+            font-size: 11px;
+            color: #475569;
+            text-align: center;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>[ VECTRA TRANSLATOR ]</h1>
-    
-    <label for="englishInput">English Text:</label>
-    <textarea id="englishInput" placeholder="Type English here..."></textarea>
-    
-    <div class="arrow">↕</div>
-    
-    <label for="customInput">VECTRA Language:</label>
-    <textarea id="customInput" placeholder="Symbol translation will appear here..."></textarea>
-</div>
+    <div class="container">
+        <h1>[ VECTRA TRANSLATOR ]</h1>
+        
+        <div class="input-group">
+            <label for="englishInput">Plaintext (English & Numbers):</label>
+            <textarea id="englishInput" placeholder="Type message here..."></textarea>
+        </div>
 
-<script>
-    // Your exact custom alphabet mapping
-    const translationMap = {
-        'A': '^',  'B': '»',  'C': '⟪',  'D': '⟫',  'E': '¦',  'F': '⌈',  'G': '↺',  'H': 'µ',
-        'I': 'v',  'J': '⌉',  'K': '⤶',  'L': '⌊',  'M': '⊓',  'N': '⊔',  'O': '↻',  'P': '⌌',
-        'Q': '⌍',  'R': '⇄',  'S': '∼',  'T': '┬',  'U': '⋏',  'V': '⋎',  'W': '⌗',  'X': '',
-        'Y': '⟰',  'Z': '↱',  ' ': '·',
-        '1': '⊢',  '2': '⊣',  '3': '⊤',  '4': '⊥',  '5': '⊹',  '6': '⊦',  '7': '⊧',  '8': '⫝',
-        '9': '⫝̸',  '0': '⊙'
-    };
+        <div class="action-container">
+            <div class="status-node">
+                <div class="status-dot"></div>
+                <span>Matrix Engine Active</span>
+            </div>
+            <button class="copy-btn" id="copyBtn">Copy Stream</button>
+        </div>
+        
+        <div class="input-group">
+            <label for="customInput">VECTRA Ciphertext:</label>
+            <textarea id="customInput" placeholder="Cipher stream will appear here..."></textarea>
+        </div>
+        
+        <div class="legend">
+            Note: Numbers require mode switches. System auto-wraps numbers in “ and ‘.<br>
+            Spaces are included in the shifting alphabet (Positions 1-27).
+        </div>
+    </div>
 
-    // Create a reverse map for translating back to English
-    const reverseMap = {};
-    for (let key in translationMap) {
-        reverseMap[translationMap[key]] = key;
-    }
+    <script>
+        // Exact custom alphabet mapping
+        const translationMap = {
+            'A': '^', 'B': '»', 'C': '⟪', 'D': '⟫', 'E': '¦', 'F': '⌈', 'G': '↺', 'H': 'µ', 
+            'I': 'v', 'J': '⌉', 'K': '⤶', 'L': '⌊', 'M': '⊓', 'N': '⊔', 'O': '↻', 'P': '⌌', 
+            'Q': '⌍', 'R': '⇄', 'S': '∼', 'T': '┬', 'U': '⋏', 'V': '⋎', 'W': '⌗', 'X': '', 
+            'Y': '⟰', 'Z': '↱', ' ': '·', '1': '⊢', '2': '⊣', '3': '⊤', '4': '⊥', '5': '⊹', 
+            '6': '⊦', '7': '⊧', '8': '⫝', '9': '⫝̸', '0': '⊙'
+        };
 
-    const englishInput = document.getElementById('englishInput');
-    const customInput = document.getElementById('customInput');
-
-    // Translate English to Custom Language
-    englishInput.addEventListener('input', () => {
-        const text = englishInput.value.toUpperCase();
-        let result = '';
-        for (let char of text) {
-            result += translationMap[char] !== undefined ? translationMap[char] : char;
+        // Create a reverse map for translating back to English
+        const reverseMap = {};
+        for (let key in translationMap) {
+            if (translationMap[key] !== '') {
+                reverseMap[translationMap[key]] = key;
+            }
         }
-        customInput.value = result;
-    });
 
-    // Translate Custom Language back to English
-    customInput.addEventListener('input', () => {
-        const text = customInput.value;
-        let result = '';
-        // Group by characters to match multi-length symbols properly
-        for (let char of text) {
-            result += reverseMap[char] !== undefined ? reverseMap[char] : char;
-        }
-        englishInput.value = result.toLowerCase();
-    });
-</script>
+        const englishInput = document.getElementById('englishInput');
+        const customInput = document.getElementById('customInput');
+        const copyBtn = document.getElementById('copyBtn');
 
+        // Translate English to Custom Language
+        englishInput.addEventListener('input', () => {
+            const text = englishInput.value.toUpperCase();
+            let result = '';
+            for (let char of text) {
+                result += translationMap[char] !== undefined ? translationMap[char] : char;
+            }
+            customInput.value = result;
+        });
+
+        // Translate Custom Language back to English
+        customInput.addEventListener('input', () => {
+            const text = customInput.value;
+            let result = '';
+            for (let char of text) {
+                result += reverseMap[char] !== undefined ? reverseMap[char] : char;
+            }
+            englishInput.value = result.toLowerCase();
+        });
+
+        // Action panel functionality
+        copyBtn.addEventListener('click', () => {
+            if (!customInput.value) return;
+            navigator.clipboard.writeText(customInput.value);
+            const originalText = copyBtn.innerText;
+            copyBtn.innerText = 'COPIED!';
+            setTimeout(() => {
+                copyBtn.innerText = originalText;
+            }, 1500);
+        });
+    </script>
 </body>
 </html>
+
