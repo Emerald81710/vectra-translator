@@ -61,7 +61,7 @@
 
         .input-group {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         label {
@@ -101,33 +101,6 @@
             color: #334155;
         }
 
-        .action-container {
-            display: flex;
-            justify-content: flex-end; /* Aligns the button cleanly to the right side */
-            margin: 15px 0;
-            padding: 10px 0;
-        }
-
-        .copy-btn {
-            background: transparent;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: var(--accent);
-            padding: 6px 16px;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 11px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.2s;
-            letter-spacing: 1px;
-        }
-
-        .copy-btn:hover {
-            background: var(--accent);
-            color: #04070d;
-            box-shadow: 0 0 10px var(--accent-dim);
-        }
-
         .legend {
             margin-top: 30px;
             padding-top: 20px;
@@ -149,20 +122,14 @@
             <label for="englishInput">Plaintext (English & Numbers):</label>
             <textarea id="englishInput" placeholder="Type message here..."></textarea>
         </div>
-
-        <div class="action-container">
-            <button class="copy-btn" id="copyBtn">Copy Stream</button>
-        </div>
         
         <div class="input-group">
             <label for="customInput">VECTRA Ciphertext:</label>
-            <textarea id="customInput" placeholder="Cipher stream will appear here..."></textarea>
+            <textarea id="customInput" placeholder="VECTRA Language will appear here..."></textarea>
         </div>
         
         <div class="legend">
-            Note: Numbers require mode switches. System auto-wraps numbers in “ and ‘.<br>
-            Spaces are included in the shifting alphabet (Positions 1-27).
-        </div>
+            
     </div>
 
     <script>
@@ -185,7 +152,6 @@
 
         const englishInput = document.getElementById('englishInput');
         const customInput = document.getElementById('customInput');
-        const copyBtn = document.getElementById('copyBtn');
 
         // Translate English to Custom Language
         englishInput.addEventListener('input', () => {
@@ -205,17 +171,6 @@
                 result += reverseMap[char] !== undefined ? reverseMap[char] : char;
             }
             englishInput.value = result.toLowerCase();
-        });
-
-        // Action panel functionality
-        copyBtn.addEventListener('click', () => {
-            if (!customInput.value) return;
-            navigator.clipboard.writeText(customInput.value);
-            const originalText = copyBtn.innerText;
-            copyBtn.innerText = 'COPIED!';
-            setTimeout(() => {
-                copyBtn.innerText = originalText;
-            }, 1500);
         });
     </script>
 </body>
