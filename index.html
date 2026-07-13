@@ -16,7 +16,7 @@
         textarea:focus{outline:none;border-color:rgba(16,185,129,0.5);box-shadow:0 0 12px rgba(16,185,129,0.15),inset 0 2px 8px rgba(0,0,0,0.8);color:#fff;}
         textarea::placeholder{color:#334155;}
         .legend{margin-top:30px;padding-top:20px;border-top:1px dashed #1e293b;font-size:11px;color:#475569;text-align:center;line-height:1.6;letter-spacing:0.5px;}
-        .secret-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(4,7,13,0.85);backdrop-filter:blur(6px);z-index:10000;justify-content:center;align-items:center;box-sizing:border-box;}
+        .secret-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(4,7,13,0.85);backdrop-filter:blur(6px);z-index:10000;justify-content:center;align-items:center;box-sizing:border-box;transition:transform 0.1s ease;}
         .modal-content{background:var(--card-bg);color:var(--text-light);padding:35px;border-radius:12px;border:2px solid var(--accent);text-align:center;box-shadow:0 0 30px rgba(16,185,129,0.2);max-width:450px;width:90%;box-sizing:border-box;}
         .modal-content h3{margin-top:0;letter-spacing:2px;color:var(--accent);text-transform:uppercase;}
         .modal-content input{background:#04070d;border:1px solid #131e31;color:#fff;padding:12px;text-align:center;font-size:16px;margin-bottom:20px;border-radius:6px;width:100%;box-sizing:border-box;font-family:inherit;}
@@ -68,33 +68,37 @@
         const translationMap={'A':'^','B':'»','C':'⟪','D':'⟫','E':'¦','F':'⌈','G':'↺','H':'µ','I':'v','J':'⌉','K':'⤶','L':'⌊','M':'⊓','N':'⊔','O':'↻','P':'⌌','Q':'⌍','R':'⇄','S':'∼','T':'┬','U':'⋏','V':'⋎','W':'⌗','X':'⁕','Y':'⟰','Z':'↱',' ':'·','1':'⊢','2':'⊣','3':'⊤','4':'⊥','5':'⊹','6':'⊦','7':'⊧','8':'⫝','9':'⫝̸','0':'⊙'};
         const reverseMap={};for(let k in translationMap){if(translationMap[k]!==''){reverseMap[translationMap[k]]=k;}}
         const englishInput=document.getElementById('englishInput'),customInput=document.getElementById('customInput');
+        
         englishInput.addEventListener('input',()=>{let t=englishInput.value.toUpperCase(),r='';for(let c of t){r+=translationMap[c]!==undefined?translationMap[c]:c;}customInput.value=r;});
         customInput.addEventListener('input',()=>{let t=customInput.value,r='';for(let c of t){r+=reverseMap[c]!==undefined?reverseMap[c]:c;}englishInput.value=r.toLowerCase();});
 
         const SECRET_CODE="81710";
+        function playChime(){
+            try{let ctx=new(window.AudioContext||window.webkitAudioContext)(),t=0;
+            [523,659,784,1046].forEach(f=>{setTimeout(()=>{let o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0.1,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.3);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+0.3);},t);t+=70;});}catch(e){}
+        }
+
         function openCodePanel(){document.getElementById('code-panel').style.display='flex';document.getElementById('cipher-code-input').focus();}
         function closeCodePanel(){document.getElementById('code-panel').style.display='none';document.getElementById('cipher-code-input').value='';document.getElementById('error-message').classList.add('hidden');}
-        function checkCode(){if(document.getElementById('cipher-code-input').value===SECRET_CODE){closeCodePanel();openSecretPanel();}else{document.getElementById('error-message').classList.remove('hidden');document.getElementById('cipher-code-input').value='';}}
         
+        function checkCode(){
+            const inp=document.getElementById('cipher-code-input'),err=document.getElementById('error-message'),panel=document.getElementById('code-panel');
+            if(inp.value===SECRET_CODE){closeCodePanel();openSecretPanel();}
+            else{err.classList.remove('hidden');inp.value='';panel.style.transform='translateX(12px)';setTimeout(()=>panel.style.transform='translateX(-12px)',70);setTimeout(()=>panel.style.transform='translateX(6px)',140);setTimeout(()=>panel.style.transform='translateX(0)',210);}
+        }
+
         function openSecretPanel(){
             document.getElementById('secret-panel').style.display='flex';
-            runGlitchEffect();
+            document.getElementById('secret-panel').style.background='radial-gradient(circle,#052214 0%,#020408 100%)';
+            playChime();runGlitchEffect();
         }
         function closeSecretPanel(){document.getElementById('secret-panel').style.display='none';}
         document.getElementById('cipher-code-input').addEventListener('keypress',(e)=>{if(e.key==='Enter')checkCode();});
 
         function runGlitchEffect(){
-            const el=document.getElementById('glitch-header'),targetText="⌌^∼∼⌗↻⇄⟫·^⟪⟪¦⌌┬¦⟫";
-            const glyphs=Object.values(translationMap);let iterations=0;
-            clearInterval(el.interval);
-            el.interval=setInterval(()=>{
-                el.innerText=targetText.split("").map((char,idx)=>{
-                    if(idx<iterations)return targetText[idx];
-                    return glyphs[Math.floor(Math.random()*glyphs.length)];
-                }).join("");
-                if(iterations>=targetText.length)clearInterval(el.interval);
-                iterations+=1/3;
-            },40);
+            const el=document.getElementById('glitch-header'),target="⌌^∼∼⌗↻⇄⟫·^⟪⟪¦⌌┬¦⟫",glyphs=Object.values(translationMap);
+            let iter=0;clearInterval(el.interval);
+            el.interval=setInterval(()=>{el.innerText=target.split("").map((c,i)=>{if(i<iter)return target[i];return glyphs[Math.floor(Math.random()*glyphs.length)];}).join("");if(iter>=target.length)clearInterval(el.interval);iter+=1/3;},40);
         }
     </script>
 </body>
