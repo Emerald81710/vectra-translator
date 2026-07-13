@@ -42,6 +42,7 @@
         <div class="legend"></div>
     </div>
 
+    <!-- SECURITY SELECTION POPUP -->
     <div id="code-panel" class="secret-modal">
         <div class="modal-content">
             <h3>^⋏┬µ↻⇄v↱^┬v↻⊔·⇄¦⌍⋏v⇄¦⟫</h3>
@@ -54,10 +55,22 @@
         </div>
     </div>
 
+    <!-- SECRET OVERRIDE NETWORK (PORTFOLIO HUB) -->
     <div id="secret-panel" class="secret-modal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width:500px;">
             <h3 id="glitch-header">⌌^∼∼⌗↻⇄⟫·^⟪⟪¦⌌┬¦⟫</h3>
-            <p style="color:var(--text);margin-bottom:25px;line-height:1.6;">This section is still a work in progress!</p>
+            
+            <!-- CENTRAL PORTFOLIO HUB MODULE -->
+            <div style="background:#02050a;border:1px solid var(--border);border-radius:6px;padding:20px;margin:20px 0;text-align:left;">
+                <label style="color:#64748b;font-size:11px;display:block;margin-bottom:12px;letter-spacing:2px;font-weight:bold;">[ SECURE DIRECTORY CHANNELS ]</label>
+                
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                    <!-- CHANGE THE URL INSIDE THE href CODES BELOW TO YOUR OTHER GITHUB SITES -->
+                    <a href="https://github.io" target="_blank" class="modal-btn" style="text-decoration:none;text-align:center;display:block;">[ ACCESS CIPHER MAINFRAME 01 ]</a>
+                    <a href="https://github.io" target="_blank" class="modal-btn" style="text-decoration:none;text-align:center;display:block;">[ ACCESS CIPHER MAINFRAME 02 ]</a>
+                </div>
+            </div>
+
             <div class="button-group">
                 <button class="modal-btn" onclick="closeSecretPanel()">⟫v∼⟪↻⊔⊔¦⟪┬</button>
             </div>
@@ -93,6 +106,8 @@
             playChime();runGlitchEffect();
         }
         function closeSecretPanel(){document.getElementById('secret-panel').style.display='none';}
+        
+        // Fixed the broken event listener loop right here
         document.getElementById('cipher-code-input').addEventListener('keypress',(e)=>{if(e.key==='Enter')checkCode();});
 
         function runGlitchEffect(){
@@ -100,25 +115,6 @@
             let iter=0;clearInterval(el.interval);
             el.interval=setInterval(()=>{el.innerText=target.split("").map((c,i)=>{if(i<iter)return target[i];return glyphs[Math.floor(Math.random()*glyphs.length)];}).join("");if(iter>=target.length)clearInterval(el.interval);iter+=1/3;},40);
         }
-        <!-- MULTI-CIPHER INDEX HUB -->
-<div style="background:#02050a; border:1px solid var(--border); border-radius:6px; padding:15px; margin:20px 0; text-align:left;">
-    <label style="color:#64748b; font-size:11px; display:block; margin-bottom:10px; letter-spacing:1px;">AVAILABLE DIRECTORY REPOSITORIES</label>
-    
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <!-- CIPHER LINK 01 -->
-        <a href="https://emerald81710.github.io/varis-cipher/" target="_blank" class="modal-btn" style="text-decoration:none; text-align:center; display:block;">[ VARIS ]</a>
-        
-        <!-- CIPHER LINK 02 -->
-        <a href="https://github.io" target="_blank" class="modal-btn" style="text-decoration:none; text-align:center; display:block;">[ N/A ]</a>
-        
-        <!-- CIPHER LINK 03 -->
-        <a href="https://github.io" target="_blank" class="modal-btn" style="text-decoration:none; text-align:center; display:block;">[ N/A ]</a>
-        
-        <!-- CIPHER LINK 04 -->
-        <a href="https://github.io" target="_blank" class="modal-btn" style="text-decoration:none; text-align:center; display:block;">[ N/A ]</a>
-    </div>
-</div>
-
     </script>
 </body>
 </html>
