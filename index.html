@@ -30,7 +30,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 onclick="openCodePanel()">[ VECTRA TRANSLATOR ]</h1>
+        <h1 onclick="openCodePanel()">[ VECTRA ]</h1>
         <div class="input-group">
             <label for="englishInput">Plaintext (English & Numbers):</label>
             <textarea id="englishInput" placeholder="Type message here..."></textarea>
@@ -42,7 +42,6 @@
         <div class="legend"></div>
     </div>
 
-    <!-- SECURITY SELECTION POPUP -->
     <div id="code-panel" class="secret-modal">
         <div class="modal-content">
             <h3>^⋏┬µ↻⇄v↱^┬v↻⊔·⇄¦⌍⋏v⇄¦⟫</h3>
@@ -55,19 +54,16 @@
         </div>
     </div>
 
-    <!-- SECRET OVERRIDE NETWORK (PORTFOLIO HUB) -->
     <div id="secret-panel" class="secret-modal">
         <div class="modal-content" style="max-width:500px;">
             <h3 id="glitch-header">⌌^∼∼⌗↻⇄⟫·^⟪⟪¦⌌┬¦⟫</h3>
             
-            <!-- CENTRAL PORTFOLIO HUB MODULE -->
             <div style="background:#02050a;border:1px solid var(--border);border-radius:6px;padding:20px;margin:20px 0;text-align:left;">
-                <label style="color:#64748b;font-size:11px;display:block;margin-bottom:12px;letter-spacing:2px;font-weight:bold;">[ SECURE DIRECTORY CHANNELS ]</label>
+                <label style="color:#64748b;font-size:11px;display:block;margin-bottom:12px;letter-spacing:2px;font-weight:bold;">[ ↻┬µ¦⇄·⌗¦»∼v┬¦∼ ]</label>
                 
                 <div style="display:flex;flex-direction:column;gap:10px;">
-                    <!-- CHANGE THE URL INSIDE THE href CODES BELOW TO YOUR OTHER GITHUB SITES -->
-                    <a href="https://github.io" target="_blank" class="modal-btn" style="text-decoration:none;text-align:center;display:block;">[ ACCESS CIPHER MAINFRAME 01 ]</a>
-                    <a href="https://github.io" target="_blank" class="modal-btn" style="text-decoration:none;text-align:center;display:block;">[ ACCESS CIPHER MAINFRAME 02 ]</a>
+                    <a href="https://emerald81710.github.io/varis-cipher/" target="_blank" class="modal-btn" style="text-decoration:none;text-align:center;display:block;">[ VARIS ]</a>
+                    <a href="https://github.io" target="_blank" class="modal-btn" style="text-decoration:none;text-align:center;display:block;">[ N/A ]</a>
                 </div>
             </div>
 
@@ -107,7 +103,6 @@
         }
         function closeSecretPanel(){document.getElementById('secret-panel').style.display='none';}
         
-        // Fixed the broken event listener loop right here
         document.getElementById('cipher-code-input').addEventListener('keypress',(e)=>{if(e.key==='Enter')checkCode();});
 
         function runGlitchEffect(){
