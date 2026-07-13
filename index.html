@@ -50,14 +50,14 @@
                 <button class="modal-btn" onclick="checkCode()">Submit</button>
                 <button class="modal-btn" onclick="closeCodePanel()">Cancel</button>
             </div>
-            <p id="error-message" class="hidden">ACCESS DENIED. INVALID CLEARANCE.</p>
+            <p id="error-message" class="hidden">INCORRECT PASSWORD. ACCESS DENIED.</p>
         </div>
     </div>
 
     <div id="secret-panel" class="secret-modal">
         <div class="modal-content">
-            <h3>🔓 SECURE OVERRIDE ACTIVATED</h3>
-            <p style="color:var(--text);margin-bottom:25px;line-height:1.6;">Welcome to the mainframe override network. Add your secret data, developer configs, or hidden codes here.</p>
+            <h3>SECURE OVERRIDE ACTIVATED</h3>
+            <p style="color:var(--text);margin-bottom:25px;line-height:1.6;">This section is still a work in progress!</p>
             <div class="button-group">
                 <button class="modal-btn" onclick="closeSecretPanel()">Disconnect</button>
             </div>
@@ -71,7 +71,7 @@
         englishInput.addEventListener('input',()=>{let t=englishInput.value.toUpperCase(),r='';for(let c of t){r+=translationMap[c]!==undefined?translationMap[c]:c;}customInput.value=r;});
         customInput.addEventListener('input',()=>{let t=customInput.value,r='';for(let c of t){r+=reverseMap[c]!==undefined?reverseMap[c]:c;}englishInput.value=r.toLowerCase();});
 
-        const SECRET_CODE="VECTRA_PASS";
+        const SECRET_CODE="81710";
         function openCodePanel(){document.getElementById('code-panel').style.display='flex';document.getElementById('cipher-code-input').focus();}
         function closeCodePanel(){document.getElementById('code-panel').style.display='none';document.getElementById('cipher-code-input').value='';document.getElementById('error-message').classList.add('hidden');}
         function checkCode(){if(document.getElementById('cipher-code-input').value===SECRET_CODE){closeCodePanel();openSecretPanel();}else{document.getElementById('error-message').classList.remove('hidden');document.getElementById('cipher-code-input').value='';}}
