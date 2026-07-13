@@ -5,168 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VECTRA Language Translator</title>
     <style>
-        :root {
-            --bg-color: #060a12;
-            --card-bg: #090f1a;
-            --accent: #10b981;
-            --accent-dim: rgba(16, 185, 129, 0.2);
-            --text: #94a3b8;
-            --text-light: #e2e8f0;
-            --border: #1e293b;
-        }
-
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: var(--bg-color);
-            background-image: linear-gradient(rgba(18, 24, 38, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 255, 0, 0.03));
-            background-size: 100% 4px, 6px 100%;
-            color: var(--text-light);
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        .container {
-            max-width: 650px;
-            width: 100%;
-            background: var(--card-bg);
-            padding: 35px;
-            border-radius: 12px;
-            border: 1px solid #1e293b;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(16, 185, 129, 0.03);
-            position: relative;
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--accent);
-            margin-top: 0;
-            margin-bottom: 30px;
-            letter-spacing: 4px;
-            font-size: 28px;
-            font-weight: bold;
-            text-shadow: 0 0 10px var(--accent-dim);
-            animation: textGlow 4s infinite alternate;
-        }
-
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 8px rgba(16, 185, 129, 0.3); }
-            100% { text-shadow: 0 0 18px rgba(16, 185, 129, 0.6); }
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin: 0 0 8px 4px;
-            font-weight: bold;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #64748b;
-        }
-
-        textarea {
-            width: 100%;
-            height: 130px;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid #131e31;
-            background-color: #04070d;
-            color: var(--text-light);
-            font-size: 16px;
-            box-sizing: border-box;
-            resize: vertical;
-            font-family: inherit;
-            transition: all 0.25s ease;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: rgba(16, 185, 129, 0.5);
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.15), inset 0 2px 8px rgba(0,0,0,0.8);
-            color: #fff;
-        }
-
-        textarea::placeholder {
-            color: #334155;
-        }
-
-        .legend {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px dashed #1e293b;
-            font-size: 11px;
-            color: #475569;
-            text-align: center;
-            line-height: 1.6;
-            letter-spacing: 0.5px;
-        }
+        :root{--bg-color:#060a12;--card-bg:#090f1a;--accent:#10b981;--accent-dim:rgba(16,185,129,0.2);--text:#94a3b8;--text-light:#e2e8f0;--border:#1e293b;}
+        body{font-family:'Courier New',Courier,monospace;background-color:var(--bg-color);background-image:linear-gradient(rgba(18,24,38,0) 50%,rgba(0,0,0,0.25) 50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,255,0,0.03));background-size:100% 4px,6px 100%;color:var(--text-light);margin:0;padding:40px 20px;display:flex;flex-direction:column;align-items:center;min-height:100vh;box-sizing:border-box;}
+        .container{max-width:650px;width:100%;background:var(--card-bg);padding:35px;border-radius:12px;border:1px solid #1e293b;box-shadow:0 20px 40px rgba(0,0,0,0.7),inset 0 0 20px rgba(16,185,129,0.03);position:relative;}
+        h1{text-align:center;color:var(--accent);margin-top:0;margin-bottom:30px;letter-spacing:4px;font-size:28px;font-weight:bold;text-shadow:0 0 10px var(--accent-dim);animation:textGlow 4s infinite alternate;cursor:pointer;user-select:none;}
+        @keyframes textGlow{0%{text-shadow:0 0 8px rgba(16,185,129,0.3);}100%{text-shadow:0 0 18px rgba(16,185,129,0.6);}}
+        .input-group{position:relative;margin-bottom:25px;}
+        label{display:block;margin:0 0 8px 4px;font-weight:bold;font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:#64748b;}
+        textarea{width:100%;height:130px;padding:15px;border-radius:6px;border:1px solid #131e31;background-color:#04070d;color:var(--text-light);font-size:16px;box-sizing:border-box;resize:vertical;font-family:inherit;transition:all 0.25s ease;box-shadow:inset 0 2px 8px rgba(0,0,0,0.8);}
+        textarea:focus{outline:none;border-color:rgba(16,185,129,0.5);box-shadow:0 0 12px rgba(16,185,129,0.15),inset 0 2px 8px rgba(0,0,0,0.8);color:#fff;}
+        textarea::placeholder{color:#334155;}
+        .legend{margin-top:30px;padding-top:20px;border-top:1px dashed #1e293b;font-size:11px;color:#475569;text-align:center;line-height:1.6;letter-spacing:0.5px;}
+        .secret-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(4,7,13,0.85);backdrop-filter:blur(6px);z-index:10000;justify-content:center;align-items:center;box-sizing:border-box;}
+        .modal-content{background:var(--card-bg);color:var(--text-light);padding:35px;border-radius:12px;border:2px solid var(--accent);text-align:center;box-shadow:0 0 30px rgba(16,185,129,0.2);max-width:450px;width:90%;box-sizing:border-box;}
+        .modal-content h3{margin-top:0;letter-spacing:2px;color:var(--accent);text-transform:uppercase;}
+        .modal-content input{background:#04070d;border:1px solid #131e31;color:#fff;padding:12px;text-align:center;font-size:16px;margin-bottom:20px;border-radius:6px;width:100%;box-sizing:border-box;font-family:inherit;}
+        .modal-content input:focus{outline:none;border-color:var(--accent);}
+        .button-group{display:flex;justify-content:center;gap:10px;}
+        .modal-btn{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);padding:10px 20px;cursor:pointer;font-weight:bold;border-radius:6px;font-family:inherit;transition:all 0.2s ease;text-transform:uppercase;font-size:12px;letter-spacing:1.5px;}
+        .modal-btn:hover{background:var(--accent);color:var(--bg-color);box-shadow:0 0 10px var(--accent-dim);}
+        #error-message{color:#ef4444;font-size:12px;margin-top:15px;letter-spacing:1px;}
+        .hidden{display:none;}
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h1>[ VECTRA TRANSLATOR ]</h1>
-        
+        <h1 onclick="openCodePanel()">[ VECTRA TRANSLATOR ]</h1>
         <div class="input-group">
             <label for="englishInput">Plaintext (English & Numbers):</label>
             <textarea id="englishInput" placeholder="Type message here..."></textarea>
         </div>
-        
         <div class="input-group">
             <label for="customInput">VECTRA Ciphertext:</label>
             <textarea id="customInput" placeholder="VECTRA Language will appear here..."></textarea>
         </div>
-        
-        <div class="legend">
-            
+        <div class="legend"></div>
+    </div>
+
+    <div id="code-panel" class="secret-modal">
+        <div class="modal-content">
+            <h3>Authorization Required</h3>
+            <input type="password" id="cipher-code-input" placeholder="ENTER ACCESS CODE">
+            <div class="button-group">
+                <button class="modal-btn" onclick="checkCode()">Submit</button>
+                <button class="modal-btn" onclick="closeCodePanel()">Cancel</button>
+            </div>
+            <p id="error-message" class="hidden">ACCESS DENIED. INVALID CLEARANCE.</p>
+        </div>
+    </div>
+
+    <div id="secret-panel" class="secret-modal">
+        <div class="modal-content">
+            <h3>🔓 SECURE OVERRIDE ACTIVATED</h3>
+            <p style="color:var(--text);margin-bottom:25px;line-height:1.6;">Welcome to the mainframe override network. Add your secret data, developer configs, or hidden codes here.</p>
+            <div class="button-group">
+                <button class="modal-btn" onclick="closeSecretPanel()">Disconnect</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        const translationMap = {
-            'A': '^', 'B': '»', 'C': '⟪', 'D': '⟫', 'E': '¦', 'F': '⌈', 'G': '↺', 'H': 'µ', 
-            'I': 'v', 'J': '⌉', 'K': '⤶', 'L': '⌊', 'M': '⊓', 'N': '⊔', 'O': '↻', 'P': '⌕', 
-            'Q': '⍝', 'R': '⇄', 'S': '∼', 'T': '┬', 'U': '⋏', 'V': '⋎', 'W': '⌗', 'X': '⧓', 
-            'Y': '⟰', 'Z': '↱', ' ': '·', '1': '⊢', '2': '⊣', '3': '⊤', '4': '⊥', '5': '⊹', 
-            '6': '⊦', '7': '⊧', '8': '⫝', '9': '⫝̸', '0': '⊙'
-        };
+        const translationMap={'A':'^','B':'»','C':'⟪','D':'⟫','E':'¦','F':'⌈','G':'↺','H':'µ','I':'v','J':'⌉','K':'⤶','L':'⌊','M':'⊓','N':'⊔','O':'↻','P':'⌌','Q':'⌍','R':'⇄','S':'∼','T':'┬','U':'⋏','V':'⋎','W':'⌗','X':'⁕','Y':'⟰','Z':'↱',' ':'·','1':'⊢','2':'⊣','3':'⊤','4':'⊥','5':'⊹','6':'⊦','7':'⊧','8':'⫝','9':'⫝̸','0':'⊙'};
+        const reverseMap={};for(let k in translationMap){if(translationMap[k]!==''){reverseMap[translationMap[k]]=k;}}
+        const englishInput=document.getElementById('englishInput'),customInput=document.getElementById('customInput');
+        englishInput.addEventListener('input',()=>{let t=englishInput.value.toUpperCase(),r='';for(let c of t){r+=translationMap[c]!==undefined?translationMap[c]:c;}customInput.value=r;});
+        customInput.addEventListener('input',()=>{let t=customInput.value,r='';for(let c of t){r+=reverseMap[c]!==undefined?reverseMap[c]:c;}englishInput.value=r.toLowerCase();});
 
-        const reverseMap = {};
-        for (let key in translationMap) {
-            if (translationMap[key] !== '') {
-                reverseMap[translationMap[key]] = key;
-            }
-        }
-
-        const englishInput = document.getElementById('englishInput');
-        const customInput = document.getElementById('customInput');
-
-        englishInput.addEventListener('input', () => {
-            const text = englishInput.value.toUpperCase();
-            let result = '';
-            for (let char of text) {
-                result += translationMap[char] !== undefined ? translationMap[char] : char;
-            }
-            customInput.value = result;
-        });
-
-        customInput.addEventListener('input', () => {
-            const text = customInput.value;
-            let result = '';
-            for (let char of text) {
-                result += reverseMap[char] !== undefined ? reverseMap[char] : char;
-            }
-            englishInput.value = result.toLowerCase();
-        });
+        const SECRET_CODE="VECTRA_PASS";
+        function openCodePanel(){document.getElementById('code-panel').style.display='flex';document.getElementById('cipher-code-input').focus();}
+        function closeCodePanel(){document.getElementById('code-panel').style.display='none';document.getElementById('cipher-code-input').value='';document.getElementById('error-message').classList.add('hidden');}
+        function checkCode(){if(document.getElementById('cipher-code-input').value===SECRET_CODE){closeCodePanel();openSecretPanel();}else{document.getElementById('error-message').classList.remove('hidden');document.getElementById('cipher-code-input').value='';}}
+        function openSecretPanel(){document.getElementById('secret-panel').style.display='flex';}
+        function closeSecretPanel(){document.getElementById('secret-panel').style.display='none';}
+        document.getElementById('cipher-code-input').addEventListener('keypress',(e)=>{if(e.key==='Enter')checkCode();});
     </script>
 </body>
 </html>
+
