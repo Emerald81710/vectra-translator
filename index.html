@@ -45,7 +45,7 @@
     <div id="code-panel" class="secret-modal">
         <div class="modal-content">
             <h3>^⋏┬µ↻⇄v↱^┬v↻⊔·⇄¦⌍⋏v⇄¦⟫</h3>
-            <input type="password" id="cipher-code-input" placeholder="ENTER ACCESS CODE">
+            <input type="password" id="cipher-code-input" placeholder="¦⊔┬¦⇄·^⟪⟪¦∼∼·⟪↻⟫¦">
             <div class="button-group">
                 <button class="modal-btn" onclick="checkCode()">∼⋏»⊓v┬</button>
                 <button class="modal-btn" onclick="closeCodePanel()">⟪^⊔⟪¦⌊</button>
@@ -100,6 +100,25 @@
             let iter=0;clearInterval(el.interval);
             el.interval=setInterval(()=>{el.innerText=target.split("").map((c,i)=>{if(i<iter)return target[i];return glyphs[Math.floor(Math.random()*glyphs.length)];}).join("");if(iter>=target.length)clearInterval(el.interval);iter+=1/3;},40);
         }
+        <!-- MULTI-CIPHER INDEX HUB -->
+<div style="background:#02050a; border:1px solid var(--border); border-radius:6px; padding:15px; margin:20px 0; text-align:left;">
+    <label style="color:#64748b; font-size:11px; display:block; margin-bottom:10px; letter-spacing:1px;">AVAILABLE DIRECTORY REPOSITORIES</label>
+    
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <!-- CIPHER LINK 01 -->
+        <a href="https://emerald81710.github.io/varis-cipher/" target="_blank" class="modal-btn" style="text-decoration:none; text-align:center; display:block;">[ VARIS ]</a>
+        
+        <!-- CIPHER LINK 02 -->
+        <a href="https://github.io" target="_blank" class="modal-btn" style="text-decoration:none; text-align:center; display:block;">[ N/A ]</a>
+        
+        <!-- CIPHER LINK 03 -->
+        <a href="https://github.io" target="_blank" class="modal-btn" style="text-decoration:none; text-align:center; display:block;">[ N/A ]</a>
+        
+        <!-- CIPHER LINK 04 -->
+        <a href="https://github.io" target="_blank" class="modal-btn" style="text-decoration:none; text-align:center; display:block;">[ N/A ]</a>
+    </div>
+</div>
+
     </script>
 </body>
 </html>
